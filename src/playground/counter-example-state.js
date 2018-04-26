@@ -16,6 +16,25 @@ class Counter extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const stringCount = localStorage.getItem('count');
+    const count = parseInt(stringCount, 10);
+
+    if (!isNaN(count)) { // if it isn't NaN
+      // set count to current localStorage data
+      this.setState(() => ({ count }));
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps, prevState);
+    // if prevState has different length than current one then save data
+    if (prevState.count !== this.state.count) {
+      localStorage.setItem('count', this.state.count);
+      console.log('Data Saved!');
+    }
+  }
+
   handleAddOne(e) {
     // auto render state using built-in setState
     // state is changing just the specific value it doesn't override other declared values in the object
@@ -50,5 +69,9 @@ class Counter extends React.Component {
     );
   }
 }
+
+// Counter.defaultProps = {
+//   count: 0
+// };
 
 ReactDOM.render(<Counter />, document.getElementById('app'));

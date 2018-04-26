@@ -4,9 +4,42 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this); // bind to the current instance
     this.handlePick = this.handlePick.bind(this); // bind to the current instance
     this.handleAddOption = this.handleAddOption.bind(this); // bind to the current instance
+    this.handleDeleteOption = this.handleDeleteOption.bind(this); // bind to the current instance
     this.state = {
       options: []
     }
+  }
+  // LIFE CYCLE Built-in METHODS - can be access only in class based Components, slow than stateless functions
+  //  -componentDidMount - fires up in load, i.e fetching & loading data
+  //  -componentDidUpdate - Updates when there's change in state, i.e saving data
+  //  -componentWillUnmount - fires up when the component goes away, specifically when in multiple pages
+  // </reference https://reactjs.org/d ocs/state-and-lifecycle.html
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('options');
+      const options = JSON.parse(json);
+
+      if (options) {
+        // set options to current localStorage data
+        this.setState(() => ({ options }));
+      }
+    } catch (error) {
+      // Do nothing at all
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps, prevState);
+    // if prevState has different length than current one then save data
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);
+      console.log('Data Saved!');
+    }
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
   }
 
   handlePick() {
@@ -15,12 +48,17 @@ class IndecisionApp extends React.Component {
     alert(option);
   }
 
+  handleDeleteOption(optionToRemove) {
+    // implicitly return object state
+    this.setState((prevState) => ({
+      // check if they are not equal set to stay in array otherwise remove
+      options: prevState.options.filter((option) => optionToRemove !== option)
+    }));
+  }
+
   handleDeleteOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      }
-    });
+    // implicitly return object state ({})
+    this.setState(() => ({ options: [] }));
   }
 
   handleAddOption(option) {
@@ -30,21 +68,16 @@ class IndecisionApp extends React.Component {
       return 'This option already exists';
     }
 
-    this.setState((prevState) => {
-      return {
-        // push to the array using concat
-        options: prevState.options.concat(option)
-      };
-    });
+    // push to the array using concat
+    this.setState((prevState) => ({ options: prevState.options.concat(option) }));
   }
 
   render() {
-    const title = 'Indecision';
     const subtitle = 'Put your life in the hands of a computer.';
     return (
-      // Set Components & their props / properties
+      // Set Components & their props / properties chaining to sub components,
       <div>
-        <Header title={ title } subtitle={ subtitle }/>
+        <Header subtitle={ subtitle }/>
         <Action
           hasOptions={ this.state.options.length > 0 }
           handlePick={ this.handlePick }
@@ -52,6 +85,7 @@ class IndecisionApp extends React.Component {
         <Options
           options={ this.state.options }
           handleDeleteOptions={ this.handleDeleteOptions }
+          handleDeleteOption={ this.handleDeleteOption }
         />
         <AddOption
           handleAddOption={ this.handleAddOption }
@@ -61,55 +95,70 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component {
-  render() {
-    // to access props key value pair
-    console.log(this.props);
-    return (
-      <div>
-        <h1>{ this.props.title }</h1>
-        <h2>{ this.props.subtitle }</h2>
-      </div>
-    );
-  }
-}
+// Set Default prop values for reusable components & fallback values
+// If no prop is pass in then default prop will be use
+// IndecisionApp.defaultProps = {
+//   options: []
+// };
 
-class Action extends React.Component {
-  render() {
-    return (
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{ props.title }</h1>
+      { props.subtitle && <h2>{ props.subtitle }</h2> }
+    </div>
+  );
+};
+
+Header.defaultProps = {
+  title: 'Indecision'
+};
+
+const Action = (props) => {
+  return (
+    <button
+      onClick={ props.handlePick }
+      disabled={ !props.hasOptions }
+    >
+      What should I do?
+    </button>
+  );
+};
+
+const Options = (props) => {
+  // Key should be specified inside the array.
+  return (
+    <div>
+      <button onClick={ props.handleDeleteOptions }>Remove All</button>
+      { props.options.length === 0 && <p>Please add an option to get started!</p>}
+      {
+        props.options.map(option => (
+          <Option
+            key={ option }
+            optionText={ option }
+            handleDeleteOption={ props.handleDeleteOption }
+          />
+        ))
+      }
+    </div>
+  );
+};
+
+const Option = (props) => {
+  // Pass optionText to IndecisionApp handleDeleteOption
+  return (
+    <div>
+      { props.optionText }
       <button
-        onClick={ this.props.handlePick }
-        disabled={ !this.props.hasOptions }
+        onClick={ (e) => {
+          props.handleDeleteOption(props.optionText);
+        }}
       >
-        What should I do?
+        remove
       </button>
-    );
-  }
-}
-
-class Options extends React.Component {
-  render() {
-    // Key should be specified inside the array.
-    return (
-      <div>
-        <button onClick={ this.props.handleDeleteOptions }>Remove All</button>
-        { this.props.options.map(option => <Option key={ option } optionText={ option }/>) }
-      </div>
-    );
-  }
-}
-
-class Option extends React.Component {
-  render() {
-    return (
-      <div>
-        <ul>
-          <li>{ this.props.optionText }</li>
-        </ul>
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 class AddOption extends React.Component {
   constructor(props) {
@@ -122,16 +171,14 @@ class AddOption extends React.Component {
 
   handleAddOption(e) {
     e.preventDefault(); // prevent form default submission process
-
     const option = e.target.elements.option.value.trim(); // input name option & value, and trim white spaces
     // return this.props.options.includes(option) ? alert('EXIST!') : alert('!EXIST!');
     const error = this.props.handleAddOption(option);
-
-    this.setState(() => {
-      return { error }; // set state if something happen in error
-    });
-
-    e.target.elements.option.value = ''
+    // using shorthand set object state if something happen in handleAddOption from Indecision
+    this.setState(() => ({ error })); // error: error
+    if (!error) {
+      e.target.elements.option.value = ''
+    }
   }
 
   render() {
@@ -147,5 +194,6 @@ class AddOption extends React.Component {
   }
 }
 
-// render IndecisionApp & its Components to REACT DOM
+// render IndecisionApp & its Components & sub Components to REACT DOM
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+// ReactDOM.render(<IndecisionApp options={[]}/>, document.getElementById('app'));

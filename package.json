@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "dev:watch": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react -w",
-    "playground:watch": "babel src/playground/build-it-visible-state.js --out-file=public/scripts/app.js --presets=env,react -w"
+    "playground:watch": "babel src/playground/counter-example-state.js --out-file=public/scripts/app.js --presets=env,react -w"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

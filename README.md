@@ -8,4 +8,4 @@
 
 ## Babel Stage 2 Plugin [Will Update after Stage 4]
 
-- Transform Class Properties
+- [Transform Class Properties](https://medium.com/@jacobworrel/babels-transform-class-properties-plugin-how-it-works-and-what-it-means-for-your-react-apps-6983539ffc22)

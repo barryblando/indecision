@@ -1,7 +1,12 @@
 {
   "cSpell.words": [
+    "add",
     "component",
+    "dev",
+    "entrypoints",
+    "server",
     "unmount",
     "will"
-  ]
+  ],
+  "nodeTdd.activateOnStartup": false
 }

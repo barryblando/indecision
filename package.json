@@ -5,16 +5,30 @@
   "main": "index.js",
   "repository": "https://github.com/barryblando/indecision.git",
   "author": "Retr0_0x315 <barryblando@gmail.com>",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "dev:watch": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react -w",
-    "playground:watch": "babel src/playground/counter-example-state.js --out-file=public/scripts/app.js --presets=env,react -w"
+    "build:dev": "babel-node devServer.js",
+    "build:prod": "babel-node prodServer.js",
+    "serve": "live-server public/",
+    "playground:watch": "babel src/playground/counter-example-state.js --out-file=public/scripts/app.js --presets=env,react -w",
+    "test": ""
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "6.25.0",
+    "babel-loader": "7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "react-hot-loader": "^4.1.2",
+    "validator": "^9.4.1",
+    "webpack": "^2.2.1",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "3.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
 }

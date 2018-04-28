@@ -1,19 +1,17 @@
 import React from 'react';
 
-const Option = (props) => {
-  // Pass optionText to IndecisionApp handleDeleteOption
-  return (
-    <div>
-      { props.optionText }
-      <button
-        onClick={ (e) => {
-          props.handleDeleteOption(props.optionText);
-        }}
-      >
-        remove
-      </button>
-    </div>
-  );
-};
+// Pass optionText to IndecisionApp handleDeleteOption
+const Option = (props) => (
+  <div>
+    { props.optionText } { props.optionText === props.selectedOpt ? <span>- Selected Work </span> : '' }
+    <button
+      onClick={ (e) => {
+        props.handleDeleteOption(props.optionText);
+      }}
+    >
+      remove
+    </button>
+  </div>
+);
 
 export default Option;

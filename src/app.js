@@ -10,5 +10,4 @@ import IndecisionApp from './components/IndecisionApp';
 ReactDOM.render(<IndecisionApp />, document.getElementById('app')); // render IndecisionApp & its Components & sub Components to REACT DOM
 // ReactDOM.render(<IndecisionApp options={[]}/>, document.getElementById('app'));
 
-export default hot(module)(IndecisionApp);
-// module.hot.accept();
+export default hot(module)(IndecisionApp); // for React hot loader

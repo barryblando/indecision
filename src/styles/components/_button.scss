@@ -1,0 +1,48 @@
+// Big Button
+.big-button {
+  background: $purple;
+  border: none;
+  border-bottom: .6rem solid darken($color: $purple, $amount: 10%);
+  color: $color-white;
+  font-weight: 900;
+  font-size: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.6rem;
+  padding: 2.4rem;
+
+  @include respond(atSmall) {
+    margin-bottom: 4.2rem;
+    font-size: 3.2rem;
+  }
+
+  &:disabled {
+    opacity: .5;
+  }
+
+  &--spacing {
+    letter-spacing: .5rem;
+    text-transform: uppercase;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+// Small button
+.button {
+  background: $purple;
+  border: none;
+  border-bottom: .3rem solid darken($purple, 10%);
+  color: $color-white;
+  font-weight: 700;
+  padding: 1.2rem;
+
+  &--link {
+    background: none;
+    border: none;
+    color: $off-white;
+    padding: 0;
+  }
+}

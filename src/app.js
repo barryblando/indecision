@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // Hot Module Replacement
 import { hot } from 'react-hot-loader';
-// App & Style
+// App, Style, Reset
 import IndecisionApp from './components/IndecisionApp';
-import './styles/style.scss'
+import 'normalize.css/normalize.css';
+import './styles/style.scss';
 
  // render IndecisionApp & its Components & sub Components to REACT DOM
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));

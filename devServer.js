@@ -2,11 +2,12 @@
  * DEVELOPMENT SERVER
  */
 
-const webpack = require('webpack');
-const webpackDevServer = require('webpack-dev-server');
-const path = require('path');
+import webpack from 'webpack';
+import webpackDevServer from 'webpack-dev-server';
+import path from 'path';
+import config from './webpack.config.dev';
+import chalk from 'chalk';
 
-const config = require('./webpack.config.dev.js');
 const options = {
   contentBase: path.resolve(__dirname, 'public'),
   hot: true,
@@ -22,9 +23,9 @@ const server = new webpackDevServer(compiler, options);
 
 const port = 5000;
 
-server.listen(port, 'localhost', (err) => {
-  if (err) {
-    return console.log(err);
+server.listen(port, 'localhost', (error) => {
+  if (error) {
+    return console.log(chalk.red(error));
   }
-  console.log(`--> [DevServer] [Listening] on port: ${port}`);
+  console.log(chalk.blue(`--> [DevServer] [Listening] on port: ${port}`));
 });

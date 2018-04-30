@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "build:dev": "babel-node devServer.js",
-    "build:prod": "babel-node prodServer.js",
+    "build:prod": "babel-node buildProd.js",
     "serve": "live-server public/",
     "playground:watch": "babel src/playground/counter-example-state.js --out-file=public/scripts/app.js --presets=env,react -w",
     "test": ""
@@ -21,6 +21,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "chalk": "^2.4.1",
     "css-loader": "^0.28.11",
     "node-sass": "^4.9.0",
     "react-hot-loader": "^4.1.2",
@@ -32,6 +33,7 @@
     "webpack-dev-server": "3.0.0"
   },
   "dependencies": {
+    "normalize.css": "^8.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-modal": "^3.4.4"

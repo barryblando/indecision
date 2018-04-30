@@ -1,5 +1,15 @@
 # INDECISION
 
+## Features
+
+- B.E.M
+
+- Mobile-First Approach
+
+- SASS
+
+- 3-1 CSS Architecture
+
 ## Webpack Dev Server & React-Hot-Loader
 
 - [React Hot Reloader Github](https://github.com/gaearon/react-hot-loader)

@@ -28,12 +28,18 @@ class IndecisionApp extends React.Component {
     }))
   };
 
-  handleDeleteOption = (optionToRemove) => {
-    // implicitly return object state
+  handleDeleteOption = (optionToRemove, selectedOptToRemove) => {
+    // if optionToRemove equal to selectedOptToRemove then remove highlighted
+    if (optionToRemove === selectedOptToRemove) {
+      // implicitly return object state
+      this.setState((prevState) => ({
+        options: prevState.options.filter((option) => optionToRemove !== option),
+        selectedOpt: undefined
+      }));
+    }
+
     this.setState((prevState) => ({
-      // check if they are not equal set to stay in array otherwise remove
-      options: prevState.options.filter((option) => optionToRemove !== option),
-      selectedOpt: undefined // set to undefined also, to be sure
+      options: prevState.options.filter((option) => optionToRemove !== option)
     }));
   };
 
@@ -71,17 +77,13 @@ class IndecisionApp extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps, prevState);
-    // if prevState has different length than current one then save data
+    console.log('ComponentDidUpdate', prevState);
+    // if prevState has different length than current one then save current data
     if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
       localStorage.setItem('options', json);
     }
     // console.log('Data Saved!');
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
   }
 
   render() {
@@ -90,19 +92,23 @@ class IndecisionApp extends React.Component {
       // Set Components & their props / properties chaining to sub components,
       <div>
         <Header subtitle={ subtitle }/>
-        <Action
-          hasOptions={ this.state.options.length > 0 }
-          handlePick={ this.handlePick }
-        />
-        <Options
-          options={ this.state.options }
-          handleDeleteOptions={ this.handleDeleteOptions }
-          handleDeleteOption={ this.handleDeleteOption }
-          selectedOption={ this.state.selectedOpt }
-        />
-        <AddOption
-          handleAddOption={ this.handleAddOption }
-        />
+        <div className="container">
+          <Action
+            hasOptions={ this.state.options.length > 0 }
+            handlePick={ this.handlePick }
+          />
+          <div className="widget">
+            <Options
+              options={ this.state.options }
+              handleDeleteOptions={ this.handleDeleteOptions }
+              handleDeleteOption={ this.handleDeleteOption }
+              selectedOption={ this.state.selectedOpt }
+            />
+            <AddOption
+              handleAddOption={ this.handleAddOption }
+            />
+          </div>
+        </div>
         <OptionModal
           selectedOption={ this.state.selectedOption }
           handleClearSelectedOption={ this.handleClearSelectedOption }

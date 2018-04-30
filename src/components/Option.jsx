@@ -2,11 +2,16 @@ import React from 'react';
 
 // Pass optionText to IndecisionApp handleDeleteOption
 const Option = (props) => (
-  <div>
-    { props.optionText } { props.optionText === props.selectedOpt ? <span>- Selected Work </span> : '' }
+  <div
+    className={ props.optionText === props.selectedOpt ? "option option--highlighted" : "option" }
+  >
+    <p className="option__text">
+      { props.count }. { props.optionText }
+    </p>
     <button
+      className="button button--link"
       onClick={ (e) => {
-        props.handleDeleteOption(props.optionText);
+        return props.selectedOpt ? props.handleDeleteOption(props.optionText, props.selectedOpt) : props.handleDeleteOption(props.optionText);
       }}
     >
       remove

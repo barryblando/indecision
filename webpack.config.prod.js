@@ -14,7 +14,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -23,6 +23,14 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         }
+      },
+      {
+        test: /\.s?css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },

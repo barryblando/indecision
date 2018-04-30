@@ -23,8 +23,7 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.scss$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.s?css$/,
         use: [
           'style-loader',
           'css-loader',
@@ -34,7 +33,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
   plugins: [
     new webpack.NamedModulesPlugin(), // Show Update modules in browser console When HMR updates

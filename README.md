@@ -23,3 +23,10 @@
 ## Third Party Component Used
 
 - [React Modal](https://github.com/reactjs/react-modal)
+
+## Production Build Guides & Using GZIP
+
+- [Webpack Production Build Tips](https://medium.com/netscape/webpack-3-react-production-build-tips-d20507dba99a)
+- [Two Quick Ways to reduce react app size in Production](https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
+- [StackOverflow - GZIP](https://stackoverflow.com/questions/44739374/serve-gzip-html-page-in-node)
+- [StackOverflow - Express + GZIP](https://stackoverflow.com/questions/6370478/express-gzip-static-content)

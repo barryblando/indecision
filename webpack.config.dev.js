@@ -2,10 +2,12 @@
  * WEBPACK DEVELOPMENT
  */
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: [
     './src/app.js',
   ],
@@ -37,6 +39,10 @@ module.exports = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(), // Show Update modules in browser console When HMR updates
-    new webpack.HotModuleReplacementPlugin() // Enable HMR for dev config only
+    new webpack.HotModuleReplacementPlugin(), // Enable HMR for dev config only
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: 'public/index.html'
+    }),
   ],
 };

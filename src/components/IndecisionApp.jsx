@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 // Components
 import AddOption from './AddOption';
@@ -7,7 +7,7 @@ import Header from './Header';
 import Action from './Action';
 import OptionModal from './OptionModal';
 
-class IndecisionApp extends React.Component {
+class IndecisionApp extends Component {
   // When doing class properties it should in proper order
   state = {
     options: [],

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class AddOption extends React.Component {
+class AddOption extends Component {
   // transform-class-properties
   state = {
     error: undefined

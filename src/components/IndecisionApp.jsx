@@ -12,7 +12,7 @@ class IndecisionApp extends Component {
   state = {
     options: [],
     selectedOption: undefined, // handle modal open close fetch state
-    selectedOpt: undefined // after closing modal selected work should be highlighted
+    highlightedOption: undefined // after closing modal selectedOption should be highlighted
   }
 
   handleClearSelectedOption = () => {
@@ -22,9 +22,10 @@ class IndecisionApp extends Component {
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
+    // use setState to set selectedOption & select
     this.setState(() => ({
       selectedOption: option,
-      selectedOpt: option
+      highlightedOption: option
     }))
   };
 
@@ -34,7 +35,7 @@ class IndecisionApp extends Component {
       // implicitly return object state
       this.setState((prevState) => ({
         options: prevState.options.filter((option) => optionToRemove !== option),
-        selectedOpt: undefined
+        highlightedOption: undefined
       }));
     }
 
@@ -47,7 +48,7 @@ class IndecisionApp extends Component {
     // implicitly return object state ({})
     this.setState(() => ({
       options: [],
-      selectedOpt: undefined // set to undefined also, to be sure
+      highlightedOption: undefined // set to undefined also, to be sure
     }));
   };
 
@@ -102,7 +103,7 @@ class IndecisionApp extends Component {
               options={ this.state.options }
               handleDeleteOptions={ this.handleDeleteOptions }
               handleDeleteOption={ this.handleDeleteOption }
-              selectedOption={ this.state.selectedOpt }
+              highlightedOption={ this.state.highlightedOption }
             />
             <AddOption
               handleAddOption={ this.handleAddOption }

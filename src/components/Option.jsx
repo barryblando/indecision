@@ -3,7 +3,7 @@ import React from 'react';
 // Pass optionText to IndecisionApp handleDeleteOption
 const Option = (props) => (
   <div
-    className={ props.optionText === props.selectedOpt ? "option option--highlighted" : "option" }
+    className={ props.optionText === props.highlightedOption ? "option option--highlighted" : "option" }
   >
     <p className="option__text">
       { props.count }. { props.optionText }
@@ -11,7 +11,9 @@ const Option = (props) => (
     <button
       className="button button--link"
       onClick={ (e) => {
-        return props.selectedOpt ? props.handleDeleteOption(props.optionText, props.selectedOpt) : props.handleDeleteOption(props.optionText);
+        const selectedOpt = props.highlightedOption;
+        // if option to remove is highlighted option ? wipe both option & highlighted option : just delete the option w/ no highlighted class
+        return selectedOpt ? props.handleDeleteOption(props.optionText, selectedOpt) : props.handleDeleteOption(props.optionText);
       }}
     >
       remove

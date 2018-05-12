@@ -9,7 +9,7 @@ const Options = (props) => (
       <h3>Your Options</h3>
       <button
         className="button button--link"
-        onClick={ props.handleDeleteOptions }
+        onClick={ props.handleDeleteOptions /* call when Remove ALl button gets clicked & gonna wipe the state */ }
       >
         Remove All
       </button>
@@ -22,12 +22,11 @@ const Options = (props) => (
           optionText={ option }
           count={ index + 1 }
           handleDeleteOption={ props.handleDeleteOption }
-          selectedOpt={ props.selectedOption }
+          highlightedOption={ props.highlightedOption }
         />
       ))
     }
   </div>
 );
-
 
 export default Options;

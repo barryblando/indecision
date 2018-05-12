@@ -9,7 +9,7 @@ class AddOption extends Component {
   handleAddOption = (e) => {
     e.preventDefault(); // prevent form default submission process
     const option = e.target.elements.option.value.trim(); // input name option & value, and trim white spaces
-    // return this.props.options.includes(option) ? alert('EXIST!') : alert('!EXIST!');
+    // call IndecisionApp handleAddOption & pass option
     const error = this.props.handleAddOption(option);
     // using shorthand set object state if something happen in handleAddOption from Indecision
     this.setState(() => ({ error })); // error: error

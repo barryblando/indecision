@@ -3,10 +3,10 @@ import Modal from 'react-modal';
 
 const OptionModal = (props) => (
   <Modal
-    isOpen={ !!props.selectedOption }
+    isOpen={ !!props.selectedOption /* !! = true boolean. Where !!'string' = true, !!undefined = false */}
     onRequestClose={ props.handleClearSelectedOption }
     contentLabel="Selected Option"
-    closeTimeoutMS={ 200 }
+    closeTimeoutMS={ 200 /* .2s */}
     className="modal"
   >
     <h3 className="modal__title u-margin-bottom-medium">Selected Option</h3>

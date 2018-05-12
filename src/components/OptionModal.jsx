@@ -4,9 +4,9 @@ import Modal from 'react-modal';
 const OptionModal = (props) => (
   <Modal
     isOpen={ !!props.selectedOption /* !! = true boolean. Where !!'string' = true, !!undefined = false */}
-    onRequestClose={ props.handleClearSelectedOption }
+    onRequestClose={ props.handleClearSelectedOption /* use esc key or button to click on background in order to clear state & close */ }
     contentLabel="Selected Option"
-    closeTimeoutMS={ 200 /* .2s */}
+    closeTimeoutMS={ 200 /* .2s for css animation */}
     className="modal"
   >
     <h3 className="modal__title u-margin-bottom-medium">Selected Option</h3>
